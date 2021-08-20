@@ -33,12 +33,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Materials IN List</h1>
+              <h1 class="m-0">Materials List</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item active">Material IN List </li>
+                <li class="breadcrumb-item active">Materials List </li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -53,10 +53,16 @@
           <div class="card">
                   <div class="card-header">
                     <h3 class="card-title"><a href="add_material_in.php" class="btn btn-block bg-gradient-info btn-sm">Add</a></h3>
+                    <div style="float:right">
+                      <input type="radio" onclick="getType('in')" id="in" name="materials" value="">
+                        <label for="html">IN</label>
+                        <input type="radio" id="out" onclick="getType('out')" name="materials" value="">
+                        <label for="css">OUT</label>
+                    </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="asd">
                       <thead>
                         <tr >
                           <th style="width: 30px">#</th>
@@ -119,3 +125,28 @@
 </section>
 </div>
 <?php include "footer.php"; ?> 
+
+<script type="text/javascript">
+
+function getType(a) {
+  //var a =  $('input[type=radio]:checked');
+  var url = '';
+  if(a =='in') {
+    url = "controller/ajaxController.php?getType=in";
+  } else {
+    url = "controller/ajaxController.php?getType=out";
+  }
+//alert(url);             
+        
+$.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+              //alert(response);
+              $('#asd').html(response);
+
+            }
+         })
+}
+
+</script>

@@ -37,6 +37,8 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -176,11 +178,11 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -285,13 +287,19 @@
               <li class="nav-item">
                 <a href="material_in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Material_IN</p>
+                  <p>Materials</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="material_out.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Material_OUT</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="material_available.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Material Available</p>
                 </a>
               </li>
             </ul>
@@ -303,8 +311,16 @@
                 Orders
                 <i class="fas  right"></i>
               </p>
-            </a>
-            
+            </a> 
+          </li>
+          <li class="nav-item">
+            <a href="invoices.php" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Invoice
+                <i class="fas  right"></i>
+              </p>
+            </a> 
           </li>
           <li class="nav-item">
             <a href="controller/auth.php?submitVal=logout" class="nav-link">

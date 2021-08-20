@@ -14,7 +14,7 @@ $sql_ready_count = "SELECT COUNT(id) as count_id_ready  FROM orders where status
 $result_ready = mysqli_query($db->getConnection(),$sql_ready_count);
 //print_r($result); exit(); 
 $row_ready = mysqli_fetch_assoc($result_ready);
-$sql_mate = "SELECT materials.name, materials.id as mat_id,SUM(material_in_items.qty) as total_qty, material_in_items.* FROM materials INNER JOIN material_in_items ON materials.id = material_in_items.materials_id GROUP BY material_in_items.materials_id ";
+$sql_mate = "SELECT t1.materials_id,materials.id, materials.name,SUM(t1.factor*t1.mat_qty) as mat_in_qty FROM (SELECT materials_id, ifnull(SUM(qty),0) as mat_qty, 1 as factor FROM material_in_items GROUP BY materials_id UNION ALL SELECT processing.material_id, ifnull(SUM(processing.qty_used),0) mat_out_qty, -1 as factor FROM processing GROUP by processing.material_id) as t1 INNER JOIN materials ON materials.id = t1.materials_id WHERE t1.materials_id GROUP BY t1.materials_id";
 $result_mate = mysqli_query($db->getConnection(),$sql_mate);
 //$row_mate = mysqli_fetch_assoc($result_mate); 
 
@@ -97,9 +97,23 @@ $result_mate = mysqli_query($db->getConnection(),$sql_mate);
                 <h3> Material Alert  </h3>
 
                 <?php while($row_mate = mysqli_fetch_assoc($result_mate)) {
-                  if ($row_mate['total_qty'] <= 100){ ?>
-                      <span class= "col-md-6"><?php echo $row_mate ['name']; ?></span>
-                       <span class="col-md-6"> <?php echo $row_mate['total_qty']; ?></span>
+                  if ($row_mate['mat_in_qty'] <= 100){ ?>
+                      
+                    <table >
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody >
+                        <tr>
+                          <td class= "col-md-6"><?php echo $row_mate ['name']; ?></td>
+                          <td class="col-md-6"><?php echo $row_mate['mat_in_qty']; ?></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                      
                        <?php
                   }
                 }
@@ -113,7 +127,7 @@ $result_mate = mysqli_query($db->getConnection(),$sql_mate);
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="material_available.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

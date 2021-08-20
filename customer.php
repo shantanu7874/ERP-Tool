@@ -74,6 +74,7 @@
 </section>
 </div>
 <?php include "footer.php"; ?> 
+
 <script>
       function searchInput(a) {
          $.ajax({
