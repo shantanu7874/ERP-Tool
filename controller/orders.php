@@ -58,6 +58,11 @@ class Orders {
 					
 				 	$packets_to_string = 0;
 				
+				 	if (empty($_POST['packets'])){
+					$_SESSION['mssg'] = "Enter Packets";
+					header('Location: ../add_order.php');
+					return;
+					}
 
 					$sql_mat_in_it =  "INSERT into order_product_items (order_id, product_id, packets,created, modified) values ('".$last_id['id']."','".$_POST['product_id'][$i]."','".$_POST['packets'][$i]."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 

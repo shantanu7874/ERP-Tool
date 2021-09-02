@@ -60,30 +60,30 @@ $db = new Database;
 		          			<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label for="">Customer name</label>
-		      							<input type="text" class="form-control" name="customer_name" value="<?php echo $customer_name ?>" size="20" required>
+		      							<input type="text" class="form-control txtOnly" id="customer_name" name="customer_name" value="<?php echo $customer_name ?>" size="20" required>
 		    							</div>
 		    							<div class="col-md-6 mb-2">
 		     								<label for="validationServer013">GST NO.</label>
-		      							<input type="text" class="			form-control" name="gst_no"id="gst_no" value="<?php echo $gst_no ?>">
+		      							<input type="text" class="			form-control alphnumOnly" name="gst_no"id="gst_no" value="<?php echo $gst_no ?>">
 		    							</div>
 		    						</div>
 		    						<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label> Email </label>
-		      							<input type="email" name="email" class="form-control" id="email" value="<?php echo $email ?>">
+		      							<input type="email" name="email" class="form-control emailOnly" id="email" value="<?php echo $email ?>">
 		    							</div>
 		    						</div>
 		    						<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label> Contact No </label>
-		      							<input type="number" name="contact_no" class="form-control" id="contact_no" value="<?php echo $contact_no ?>">
+		      							<input type="number" name="contact_no" class="form-control numOnly" id="contact_no" value="<?php echo $contact_no ?>">
 		    							</div>
 		    						</div>	
 
 		    						<div class="row">
 			    						<div class="col-md-6 mb-2">
 			     							<label >Address</label>
-			      							<textarea type="text" name="address" class="form-control" id="address" value="<?php echo $address ?>"></textarea>
+			      							<textarea type="text" name="address" class="form-control alphnumOnly" id="address" value="<?php echo $address ?>"></textarea>
 			    						</div>
 			    					</div>
 			    					<div>	
@@ -103,33 +103,86 @@ $db = new Database;
 	</section>
 </div>
 <?php include "footer.php" ?>
-<script>
-	// Jquery Validation
-	$(function() {
-		$("form[name='customerForm']").validate({
-			rules: {
-				customer_name: 'required',
-				email: {
-					required: true,
-					email: 'required'
+<script type="text/javascript">
+    $(function() {
+        $('#onSubmit').click(function(){
+            var product_name = $('#product_name').val();
+            var gst_per = $('#gst_no').val();
+            var qty = $('#req_percentage[]').val();
 
-				},
-				gst_no: {
-					required: true,
-					gst_no: 'required'
-				}
-			},
-			message: {
-				customer_name: "Name Required",
-				email: "Valid email Required",
-				gst_no: {
-					required: "GST NO Required"
-				} 
-			},
-			submitHandler: function(form) {
-				form.submit();
-			}
-		})
-	})
+            if (product_name == 0) {
+                $('#mssg').text("Product Name Required")
+            }
+            if (gst_per == 0) {
+                $('#mssg').text("Gst % Required")
+            }
+            if (qty == 0) {
+                $('#mssg').text("QTY Required")
+            }
+
+        })
+        
+    })
+$('.numOnly').keypress(function (e) {
+            var regex = new RegExp("^[0-9]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter numbers');
+            return false;
+            }
+        });
+
+$('.txtOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+ $('.alphnumOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9,]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+ $('.emailOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9.'@#-_]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').text('Please Enter Vaild Email');
+            return false;
+            }
+        });
 
 </script>

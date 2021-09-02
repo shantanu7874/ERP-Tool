@@ -34,7 +34,7 @@ class Invoice {
 				if ($row_check) {
 					// update count here
 					$p_count = $row_check['print_count'] + 1;
-					$invoice_update = "UPDATE invoice set print_count = '".$p_count."'";
+					$invoice_update = "UPDATE invoice set print_count = '".$p_count."'WHERE order_id = '".$_REQUEST['order_id']."'  ";
 					$res_update = mysqli_query($this->conn->getConnection(),$invoice_update);
 					header('Location: ../invoice.php?id='.$_REQUEST['order_id'].'&print=true');
 					
@@ -60,6 +60,7 @@ class Invoice {
 
 					   $result_invoice = mysqli_query($this->conn->getConnection(), $sql_invoice);
 					   //print_r($sql_invoice); exit(); 
+
 				}
 
 
@@ -70,7 +71,7 @@ class Invoice {
 				
 				if($result) {
 					$_SESSION['mssg'] = "Product Added";
-					header('Location: ../invoice-print.php?id='.$_POST['order_id']);
+					header('Location: ../invoice-print.php?id='.$_POST['order_id'].'&print=true');
 					
 				} else {
 					$_SESSION['mssg'] = "Product not Added";

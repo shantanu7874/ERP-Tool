@@ -55,12 +55,12 @@ $db = new Database;
           	<div class="col-md-8">
          			<div class="card ">
          				<div class="card-body">
-		          		<form action="controller/material.php" method="post" enctype="multipart/form-data">
+		          		<form action="controller/material.php" method="post" name="myForm" id="myForm" enctype="multipart/form-data">
 		          			<span><?php if(!empty($_SESSION['mssg'])) { echo $_SESSION['mssg']; unset($_SESSION['mssg']); } ?></span><br>
 		          			<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label for="validationServer013">Material name</label>
-		      							<input type="text" class="form-control " name="name" id="" size="20" value="<?php echo $name ?>" required>
+		      							<input type="text" class="form-control txtOnly " name="name" id="material_name" size="20" value="<?php echo $name ?>" required>
 		    							</div>
 		    						</div>
 		    						<div class="row">
@@ -105,3 +105,37 @@ $db = new Database;
 
 
 <?php include "footer.php" ?>
+
+
+<script type="text/javascript">
+
+$(function() {
+        $('#onSubmit').click(function(){
+            var material_name = $('#material_name').val();
+            
+
+            if (material_name == 0) {
+                $('#mssg').text("Material Name Required")
+            }
+            
+
+        })
+        
+    })
+
+	$('.txtOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+</script>

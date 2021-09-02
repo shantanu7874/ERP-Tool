@@ -198,8 +198,6 @@
               <div class="row no-print">
                 <div class="col-12">
                   <input type="hidden" name="submitVal" value="Add">
-                 
-
                   <button class="btn btn-default" type="submit" target="_blank" href="invoice-print.php?id=<?php echo $_REQUEST['id']; ?>" name=""> <i class="fas fa-print"></i> Print</button> 
 
                   <input type="hidden" name="print" id="print" value="<?php if(isset($_REQUEST['print'])) { echo $_REQUEST['print']; } ?>">
@@ -214,10 +212,7 @@
               </div>
             </div>
           </form>
-
-
          </div>
-  
 	    </div>
 	</section>
 </div>

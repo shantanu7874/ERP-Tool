@@ -103,17 +103,17 @@ $db = new Database;
 		    							</div>
 		    							<div class="col-md-6 mb-2">
 		     								<label for="">HSN No.</label>
-		     									<input class="form-control" type="text"value="" name="hsn_no[]" size="15">
+		     									<input class="form-control alphnumOnly" type="text" id="hsn_no" name="hsn_no[]" size="15">
 		    							</div>
 		    							</div>
 		    							<div class="row">
 			    							<div class="col-md-6 mb-2">
 			    								<label>QTY</label>
-			    								<input class="form-control" type="text" value="" name="qty[]" size="10" >
+			    								<input class="form-control numOnly" id="qty" type="text" name="qty[]" size="10" >
 			    							</div>
 			    							<div class="col-md-6 mb-2"> 
 			    								<label>Amount</label>
-			    									<input class="form-control" type="text" value="" name="amt[]" size="8" >
+			    									<input class="form-control numOnly" type="text" id="amt" name="amt[]" size="8" >
 			    							</div>
 			    						</div>
 		    						</div>
@@ -165,7 +165,7 @@ $db = new Database;
 		 			  console.log(b);
 		 			}
 		 			
-	 				 var new_input = "<div class='form-inline mar-t-20'  id='new_" + new_chq_no + "'   ><div class='form-group'><label class='pad-right-5' for='materialname'>Material name: </label> <select class='form-control' name='material_id[]'>"+b+"</select> </div><div class='form-group'><label class='pad-right-5'>HSN NO.</label> <input class='form-control' type='text'value='' name='hsn_no[]' size='15' > </div><div class='form-group'><label class='pad-right-5'>Qty:</label> <input class='form-control' type='text' value='' name='qty[]' size='10' ></div><div class='form-group'><label class='pad-right-5'>Amount:</label> <input class='form-control' type='text' value='' name='amt[]' size='8' ></div></div>" ;
+	 				 var new_input = "<div class='form-inline mar-t-20'  id='new_" + new_chq_no + "'   ><div class='form-group'><label class='pad-right-5' for='materialname'>Material name: </label> <select class='form-control' name='material_id[]'>"+b+"</select> </div><div class='form-group'><label class='pad-right-5'>HSN NO.</label> <input class='form-control alphnumOnly' type='text'id='hsn_no' name='hsn_no[]' size='15' > </div><div class='form-group'><label class='pad-right-5'>Qty:</label> <input class='form-control numOnly' type='text' id='qty' name='qty[]'size='10' ></div><div class='form-group'><label class='pad-right-5'>Amount:</label> <input class='form-control numOnly' type='text' id='amt' name='amt[]' size='8' ></div></div>" ;
  
 					  $('#new_chq').append(new_input);
 					  
@@ -186,3 +186,72 @@ $db = new Database;
 
  </script>
 
+<script type="text/javascript">
+    $(function() {
+        $('#onSubmit').click(function(){
+            var bill_no = $('#bill_no').val();
+            var hsn_no = $('#hsn_no').val();
+            var qty = $('#qty').val();
+
+            if (bill_no == 0) {
+                $('#mssg').text("Product Name Required")
+            }
+            if (hsn_no == 0) {
+                $('#mssg').text("HSN No. Required")
+            }
+            if (qty == 0) {
+                $('#mssg').text("QTY Required")
+            }
+
+        })
+        
+    })
+$('.numOnly').keypress(function (e) {
+            var regex = new RegExp("^[0-9.]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter numbers');
+            return false;
+            }
+        });
+
+$('.txtOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+ $('.alphnumOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9,]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+</script>

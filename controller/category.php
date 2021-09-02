@@ -33,11 +33,11 @@ class Categories {
 
 	function add() {
 		extract($_POST);
-		/*if (empty($_POST['mssg'])){
-					$_SESSION['mssg'] = "Enter Product Name";
-					header('Location: ../add_product.php');
+		if (empty($_POST['cat_name'])){
+					$_SESSION['mssg'] = "Enter Category Name";
+					header('Location: ../add_category.php');
 					return;
-				}*/
+				}
 		$sql  = "INSERT into category (cat_name,created, modified) values ('".$_POST['cat_name']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 				//print_r($_POST) ; exit;

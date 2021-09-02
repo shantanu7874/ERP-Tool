@@ -36,11 +36,21 @@ class Products {
 	 {
 		extract($_POST);
 		//print_r($_POST); exit();
-		/*if (empty($_POST['mssg'])){
+		if (empty($_POST['product_name'])){
 					$_SESSION['mssg'] = "Enter Product Name";
 					header('Location: ../add_product.php');
 					return;
-				}*/
+				}
+				if (empty($_POST['gst_no'])){
+					$_SESSION['mssg'] = "Enter GST %";
+					header('Location: ../add_product.php');
+					return;
+				}
+				if (empty($_POST['req_percentage'])){
+					$_SESSION['mssg'] = "Enter Qty %";
+					header('Location: ../add_product.php');
+					return;
+				}
 		 $material_name_to_string = 0;
 		 $req_percentage_to_string = 0;
 		 if(!empty($_POST['materials_id'])) {
@@ -93,7 +103,7 @@ class Products {
 			} 
 			for ($i=0; $i <count($_POST['aiq']); $i++)  {
 			$product_name = $_POST['product_name']."-".$_POST['aiq'][$i];
-			$sql  = "INSERT into product (product_name,materials_id, req_percentage,gst_no, aiq, mrp, rate, discount,hsn_no, product_image, created, modified) values ('".$product_name."',
+			$sql  = "INSERT into product (product_name,materials_id, req_percentage,gst_no, aiq, mrp, rate, discount,hsn_no,description, product_image, created, modified) values ('".$product_name."',
 			'".$material_name_to_string."',
 			'".$req_percentage_to_string."',
 			'".$_POST['gst_no'][$i]."',
@@ -102,6 +112,7 @@ class Products {
 			 '".$_POST['rate'][$i]."', 
 			 '".$_POST['discount']."',
 			 '".$_POST['hsn_no']."',
+			 '".$_POST['description']."',
 			 '".$product_image."', 
 			  '".date('Y-m-d H:i:s')."', 
 			   '".date('Y-m-d H:i:s')."' )";

@@ -94,7 +94,7 @@ $db = new Database;
 										<div class="row">
 		    							<div class="col-md-6">
 		    								<label>Packets</label>
-							        		<input type="number" class="form-control " name="packets[]" id="" size="5" >
+							        		<input type="number" class="form-control numOnly " name="packets[]" id="packets" size="5" >
 					    				</div>
 		    						</div>	
 		    						<!-- <div>	
@@ -197,7 +197,7 @@ $db = new Database;
 		 			  b = b.concat(a);
 		 			  console.log(b);
 		 			}
-					 var new_input = "<div class='row'  id='new_" + new_chq_no + "'><div class='col-md-6 mb-2'><label>Product name</label> <select class='form-control' name='product_id[]'>"+b+"</select> </div><div class='row'><div class='col-md-6'><label>Packets</label><input type='number' class='form-control' name='packets[]' size='5' ></div></div>"
+					 var new_input = "<div class='row'  id='new_" + new_chq_no + "'><div class='col-md-6 mb-2'><label>Product name</label> <select class='form-control' name='product_id[]'>"+b+"</select> </div><div class='row'><div class='col-md-6'><label>Packets</label><input type='number' class='form-control' name='packets[]' id='packets' size='5' ></div></div>"
 
 	 				//   var new_input = "<div class='form-inline mar-t-20 '  id='new_" + new_chq_no + "'><div class='form-group'><label class='pad-right-5' for='materialname'>Product name: </label> <select class='form-control' name='product_id[]'>"+b+"</select> </div><div class='form-group'><table width='100%'><thead><th class='width-200'><lable>Available in Quantities</lable><br></th><th><label>Packets</label></th></thead><tr><td><input id='aiq100"+new_chq_no+"' onclick='onAiqCheck(100, "+new_chq_no+")' type='checkbox' name='aiq"+new_chq_no+"[]' value='100'> 100 &nbsp; &nbsp; </td><td><input disabled id='packets100"+new_chq_no+"' class='form-control hide' type='number' name='packets"+new_chq_no+"[]' ></td></tr><tr><td><input id='aiq200"+new_chq_no+"' onclick='onAiqCheck(200, "+new_chq_no+")' type='checkbox' name='aiq"+new_chq_no+"[]' value='200'> 200  &nbsp; &nbsp; </td><td><input disabled  id='packets200"+new_chq_no+"' class='form-control hide' type='text' name='packets"+new_chq_no+"[]' ></td></tr><tr><td><input id='aiq500"+new_chq_no+"' onclick='onAiqCheck(500, "+new_chq_no+")'' type='checkbox' name='aiq"+new_chq_no+"[]' value='500' > 500  &nbsp; &nbsp; </td><td><input disabled id='packets500"+new_chq_no+"' class='form-control hide' type='text' name='packets"+new_chq_no+"[]'></td></tr><tr><td><input id='aiq1000"+new_chq_no+"' onclick='onAiqCheck(1000, "+new_chq_no+")' type='checkbox' name='aiq"+new_chq_no+"[]' value='1000'> 1000  &nbsp; &nbsp; </td><td><input  disabled id='packets1000"+new_chq_no+"' class='form-control hide' type='text' name='packets"+new_chq_no+"[]'></td></tr></table></div>";
 					  $('#new_chq').append(new_input);
@@ -217,3 +217,71 @@ $db = new Database;
 </script>
 
 <?php include "footer.php" ?>
+
+<script type="text/javascript">
+    $(function() {
+        $('#onSubmit').click(function(){
+            var customer_name = $('#customer_name').val();
+            var packets = $('#packets').val();
+            
+
+            if (product_name == 0) {
+                $('#mssg').text("Product Name Required")
+            }
+            if (packets == 0) {
+                $('#mssg').text("Packets Required")
+            }
+            
+
+        })
+        
+    })
+$('.numOnly').keypress(function (e) {
+            var regex = new RegExp("^[0-9]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter numbers');
+            return false;
+            }
+        });
+
+$('.txtOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+ $('.alphnumOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9,]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+</script>

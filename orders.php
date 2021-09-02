@@ -53,6 +53,7 @@
     color: #fff;
     padding: 4px 8px;
     border-radius: 4px;
+    target:  _blank;
 }
 .display {
   display: none;
@@ -141,9 +142,10 @@
                               break;
                                case 'delivered':
                                 $status = "Invoice";
-                                $url = "invoice-print.php?id=".$row['id'];
+                                $url = "invoice-print.php?id=".$row['id']."&print=true";
                                 $class = "btn-outline-success";
                                 $bg_clor = "allok" ;
+
                               break;  
                             }
                            ?>
@@ -156,7 +158,6 @@
                           $order_items = "SELECT order_product_items.*, product.product_name, product.aiq FROM order_product_items INNER JOIN product on order_product_items.product_id = product.id WHERE order_product_items.order_id = '".$row['id']."' ";
                           //print_r($_POST); exit();
                           $result_order = mysqli_query($db->getConnection(), $order_items);
-
                         ?>
                         <?php 
                            while($row_items = mysqli_fetch_assoc($result_order)) {  ?>
@@ -224,3 +225,14 @@
       }
 
   </script>
+  <script>
+    window.onload = function(){
+      var p = document.getElementById('print').value;
+      var id = document.getElementById('order_id').value;
+      console.log(id);
+      if (p == 'true') {
+         window.open("invoice-print.php?id="+id, "_blank");
+      }
+        
+    }
+</script>

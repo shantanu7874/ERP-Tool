@@ -33,11 +33,11 @@ class Materials {
 
 	function add() {
 		extract($_POST);
-		/*if (empty($_POST['mssg'])){
-					$_SESSION['mssg'] = "Enter Product Name";
-					header('Location: ../add_product.php');
+		if (empty($_POST['name'])){
+					$_SESSION['mssg'] = "Enter Material Name";
+					header('Location: ../add_material.php');
 					return;
-				}*/
+				}
 		$sql  = "INSERT into materials (name, cat_id , type,created, modified) values ('".$_POST['name']."','".$_POST['cat_id']."','".$_POST['type']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 				//print_r($_POST) ; exit;

@@ -34,11 +34,12 @@ class Materials_in {
 	function add() {
 		extract($_POST);
 		print_r($_POST); echo "<br>";
-		/*if (empty($_POST['mssg'])){
-					$_SESSION['mssg'] = "Enter Product Name";
-					header('Location: ../add_product.php');
+		if (empty($_POST['bill_no'])){
+					$_SESSION['mssg'] = "Enter Bill Number";
+					header('Location: ../add_material_in.php');
 					return;
-				}*/
+				}
+
 		 $sql  = "INSERT into materials_in (supplier_id, bill_no,payment ,created, modified) values ('".$_POST ['supplier_id']."','".$_POST['bill_no']."','".$_POST['payment']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 				//print_r($sql) ; exit;
@@ -58,6 +59,16 @@ class Materials_in {
 					 print_r($_POST['hsn_no'][$i]); echo "<br>";
 					  print_r($_POST['qty'][$i]); echo "<br>";
 					   print_r($_POST['amt'][$i]); echo "<br>";*/
+					   if (empty($_POST['qty'])){
+							$_SESSION['mssg'] = "Enter Bill Number";
+							header('Location: ../add_material_in.php');
+							return;
+						}
+						if (empty($_POST['amt'])){
+							$_SESSION['mssg'] = "Enter Amount";
+							header('Location: ../add_material_in.php');
+							return;
+						}
 					   $sql_mat_in_it =  "INSERT into material_in_items (materials_in_id,materials_id, hsn_no,qty,amt ,created, modified) values ('".$last_id['id']."','".$_POST['materials_id'][$i]."','".$_POST['hsn_no'][$i]."','".$_POST['qty'][$i]."','".$_POST['amt'][$i]."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 					   $result_in = mysqli_query($this->conn->getConnection(), $sql_mat_in_it);

@@ -116,6 +116,7 @@
 	$(function() {
 		$('#onSubmit').click(function() {
 			var email = $('#email').val();
+			var e = document.getElementById('email').value;
 			var pass = $('#password').val();
 			if(email.length == 0) {
 				$('#err_email').text("Email Required");

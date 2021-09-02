@@ -195,7 +195,7 @@
 						
 					</div>
 				</div>
-				<input type="hidden" name="submitVal" value="Add">
+						<input type="hidden" name="submitVal" value="Add">
 						<input type="hidden" name="order_id" value=" <?php echo $_REQUEST['id'] ?>" >
 						<button class="btn btn-primary"  name="submit"  type="submit">Start Process </button>
 			</form>

@@ -54,29 +54,29 @@ $db = new Database;
           	<div class="col-md-8">
          			<div class="card ">
          				<div class="card-body">
-		          		<form action="controller/supplier.php" method="post" enctype="multipart/form-data">
+		          		<form action="controller/supplier.php" method="post" name="myForm" id="myForm" enctype="multipart/form-data">
 		          			<span><?php if(!empty($_SESSION['mssg'])) { echo $_SESSION['mssg']; unset($_SESSION['mssg']); } ?></span><br>
 		          			<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label for="validationServer013">Supplier name</label>
-		      							<input type="text" class="form-control" name="supplier_name" value="<?php echo $supplier_name ?>" size="20" required>
+		      							<input type="text" class="form-control txtOnly" id="supplier_name" name="supplier_name" value="<?php echo $supplier_name ?>" size="20" required>
 		    							</div>
 		    							<div class="col-md-6 mb-2">
 		     								<label for="validationServer013">GST NO.</label>
-		      							<input type="text" class="			form-control" name="gst_no" 	id="gst_no" value="<?php echo $gst_no ?>">
+		      							<input type="text" class="			form-control alphnumOnly" name="gst_no" 	id="gst_no" value="<?php echo $gst_no ?>">
 		    							</div>
 		    						</div>
 		    						<div class="row">
 		    							<div class="col-md-6 mb-2">
 		     								<label> Contact No </label>
-		      							<input type="number" name="contact_no" class="form-control" id="contact_no" value="<?php echo $contact_no ?>">
+		      							<input type="number" name="contact_no" class="form-control numOnly" id="contact_no" value="<?php echo $contact_no ?>">
 		    							</div>
 		    						</div>	
 
 		    						<div class="row">
 			    						<div class="col-md-6 mb-2">
 			     							<label >Address</label>
-			      							<textarea type="text" name="address" class="form-control" id="address" value="<?php echo $address ?>"></textarea>
+			      							<textarea type="text" name="address" class="form-control alphnumOnly" id="address" value="<?php echo $address ?>"></textarea>
 			    						</div>
 			    					</div>
 			    					<div>	
@@ -86,13 +86,6 @@ $db = new Database;
 											
 											<button class="btn btn-primary" name="submit" value="<?php echo $submitVal; ?>" type="submit"><?php echo $button; ?> </button>
 										</div>
-											
-										
-
-
-
-
-
 
 		          		</form>	
           			</div>
@@ -104,8 +97,73 @@ $db = new Database;
 	    </div>
 	</section>
 </div>
-
-
-
-
 <?php include "footer.php" ?>
+<script type="text/javascript">
+    $(function() {
+        $('#onSubmit').click(function(){
+            var supplier_name = $('#supplier_name').val();
+            var contact = $('#contact_no').val();
+            var address = $('#address').val();
+
+            if (product_name == 0) {
+                $('#mssg').text("Product Name Required")
+            }
+            if (contact == 0) {
+                $('#mssg').text("Contact No.Required")
+            }
+            if (address == 0) {
+                $('#mssg').text("QTY Required")
+            }
+
+        })
+        
+    })
+$('.numOnly').keypress(function (e) {
+            var regex = new RegExp("^[0-9]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter numbers');
+            return false;
+            }
+        });
+
+$('.txtOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+ $('.alphnumOnly').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9,]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+            else
+            {
+            e.preventDefault();
+            $('.error').show();
+            $('.error').color();
+            $('.error').text('Please Enter Alphabate');
+            return false;
+            }
+        });
+
+</script> 

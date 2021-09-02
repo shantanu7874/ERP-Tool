@@ -34,11 +34,22 @@ class Customer {
 	function add() {
 		extract($_POST);
 		//print_r($_POST); exit();
-		/*if (empty($_POST['mssg'])){
-					$_SESSION['mssg'] = "Enter Product Name";
-					header('Location: ../add_product.php');
+		if (empty($_POST['customer_name'])){
+					$_SESSION['mssg'] = "Enter Customer Name";
+					header('Location: ../add_customer.php');
 					return;
-				}*/
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				$_SESSION['mssg'] = "Enter valid email ";
+				header('Location: ../add_customer.php');
+				return;
+			}
+				}
+
+		if (empty($_POST['contact'])){
+					$_SESSION['mssg'] = "Enter Contact No";
+					header('Location: ../add_customer.php');
+					return;
+				}		
 		$sql  = "INSERT into customers (customer_name, gst_no , email, contact, address, created, modified) values ('".$_POST['customer_name']."','".$_POST['gst_no']."','".$_POST['email']."','".$_POST['contact']."','".$_POST['address']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 				//print_r($_POST) ; exit;

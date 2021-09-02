@@ -33,11 +33,16 @@ class Suppliers {
 
 	function add() {
 		extract($_POST);
-		/*if (empty($_POST['mssg'])){
-					$_SESSION['mssg'] = "Enter Product Name";
-					header('Location: ../add_product.php');
+		if (empty($_POST['supplier_name'])){
+					$_SESSION['mssg'] = "Enter Supplier Name";
+					header('Location: ../add_supplier.php');
 					return;
-				}*/
+				}
+				if (empty($_POST['contact_no'])){
+					$_SESSION['mssg'] = "Enter Conatct Number";
+					header('Location: ../add_supplier.php');
+					return;
+				}
 		$sql  = "INSERT into supplier (supplier_name,gst_no,contact_no,address,created, modified) values ('".$_POST['supplier_name']."','".$_POST['gst_no']."','".$_POST['contact_no']."','".$_POST['address']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 				//print_r($_POST) ; exit;
