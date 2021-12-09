@@ -11,7 +11,7 @@
   //print_r($result); exit();
   $row = mysqli_fetch_assoc($result);
  //print_r($row); exit();
- $order_items = "SELECT order_product_items.*, product.product_name,product.mrp,product.rate,product.gst_no,product.hsn_no FROM order_product_items INNER JOIN product on order_product_items.product_id = product.id WHERE order_product_items.order_id = '".$_REQUEST['id']."' ";
+ $order_items = "SELECT order_product_items.*, product.product_name,product.mrp,product.aiq,product.rate,product.gst_no,product.hsn_no FROM order_product_items INNER JOIN product on order_product_items.product_id = product.id WHERE order_product_items.order_id = '".$_REQUEST['id']."' ";
  $result_order = mysqli_query($db->getConnection(), $order_items);
  //$row_order = mysqli_fetch_assoc($result_order);
  //print_r($order_items); exit();
@@ -123,7 +123,7 @@
                         //print_r($row_order); ?>
                     <tr style="text-align: center;">
                       <td><?php echo $i++; ?></td><input type="hidden" name="product_id[]" value="<?php echo $row_order['product_id'] ?>">
-                      <td><?php echo $row_order['product_name'] ?></td><input type="hidden" name="product_name[]" value="<?php echo $row_order['product_name'] ?>">
+                      <td><?php echo $row_order['product_name'].'-'.$row_order['aiq']  ?>g</td><input type="hidden" name="product_name[]" value="<?php echo $row_order['product_name'].'-'.$row_order['aiq']  ?>g">
                       <td><?php echo $row_order['hsn_no'] ?></td><input type="hidden" name="hsn_no[]" value="<?php echo $row_order['hsn_no'] ?>">
                        <td><?php echo $row_order['mrp'] ?></td><input type="hidden" name="mrp[]" value="<?php echo $row_order['mrp'] ?>">
                       <td><?php echo $row_order['packets'] ?></td><input type="hidden" name="packets[]" value="<?php echo $row_order['packets'] ?>">

@@ -87,7 +87,7 @@ $db = new Database;
 		    								<label>Product Name</label>
 							        		<select class="form-control" name="product_id[]">
 					     							<?php while($rov=mysqli_fetch_assoc($resul)) { ?>
-				     								<option value="<?php echo $rov['id'] ?>"><?php echo $rov['product_name']; ?></option>
+				     								<option value="<?php echo $rov['id'] ?>"><?php echo $rov['product_name'].'-'.$rov['aiq']; ?></option>
 				     								<?php } ?>
 									     		</select><br>	
 					    				</div>

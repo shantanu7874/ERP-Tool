@@ -6,7 +6,7 @@
   
 
   $db = new Database();
-  $sql = "SELECT * FROM product GROUP BY hsn_no";
+  $sql = "SELECT * FROM product GROUP BY cat_name";
 
   $result = mysqli_query($db->getConnection(),$sql);
   $response = array();
@@ -16,11 +16,7 @@
     $products = array(
       'id' => $row['id'],
       'productName' => $row['product_name'],
-      'mrp' => $row['mrp'],
-      'aiq' => $row['aiq'],
-      'hsn' => $row['hsn_no'],
-      'description'=> $row['description'],
-      'image' => $row ['product_image']
+      'cat_name' => $row ['cat_name']
     );
 
     array_push($response, $products);

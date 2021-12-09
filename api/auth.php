@@ -6,8 +6,6 @@
   
 $db = new Database();
       // 1. Check if email exists or notå.
-    
-      extract($_POST);
       //print_r($_REQUEST);
       // if (empty($email)) {
       //   $_SESSION['err_mail'] = "Email Required";
@@ -43,19 +41,17 @@ $db = new Database();
       //print_r($row);
      
       if ($row) {
-        
+       
         // first variable user input password and second varibale form database
         if (md5($_REQUEST['password']) == $row['password']) {
           $data = array(
-            'id'=> 1,
+            'id'=> $row['id'],
             'email'=>$_REQUEST['email'],
-            'name'=>$data ['name'],
-            'country'=>$data['country'],
-            'status' => 200,
-            'mssg' => "Loged in"
+            'name'=>$row ['name'],
+            'mssg' => "ALL_OK"
           );
            echo json_encode($data);
-          ///print_r($data);
+          //print_r($data); exit();
         } else {
           
           $data = array(
@@ -69,7 +65,7 @@ $db = new Database();
       } else {
         
          $data = array(
-            'status' => 200,
+            'status' => "EMAIL_NOT_FOUND",
             'mssg' => "Email id not found",
           );
           echo json_encode($data);

@@ -33,7 +33,7 @@ class Processing {
 			//print_r(count($_POST['material_id'])); exit();
 			for ($j=0; $j<count($_POST['material_id'.$a]); $j++) {
 				//print_r($_POST); exit();
-				$sql  = "INSERT into processing (order_id, product_id , material_id, qty_used,product_kg, created, modified) values ('".$_POST['order_id']."','".$_POST['product_id'][$i]."','".$_POST['material_id'.$a][$j]."','".$_POST['qty_used'.$a][$j]."','".$_POST['product_kg'][$i]."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
+				$sql  = "INSERT into processing (order_id, product_id , material_id, qty_used,product_kg, packets, created, modified) values ('".$_POST['order_id']."','".$_POST['product_id'][$i]."','".$_POST['material_id'.$a][$j]."','".$_POST['qty_used'.$a][$j]."','".$_POST['product_kg'][$i]."','".$_POST['packets'][$i]."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."' )";
 
 
 
@@ -51,11 +51,11 @@ class Processing {
 				//print_r($sql); exit();
 				
 				if($result) {
-					$_SESSION['mssg'] = "Product Added";
+					$_SESSION['mssg'] = "Order Added";
 					header('Location: ../orders.php');
 					
 				} else {
-					$_SESSION['mssg'] = "Product not Added";
+					$_SESSION['mssg'] = "Order not Added";
 					header('Location:../orders.php');
 					}
 

@@ -88,7 +88,7 @@
 									<div class="row">
 										<div class="col-md-4">
 											<label>Product Name :</label>
-											<span><?php echo $row_order['product_name'] ?></span>
+											<span><?php echo $row_order['product_name'].'-'.$row_order['aiq'] ?></span>
 											
 										</div>
 										<div class="col-md-4">
@@ -99,7 +99,7 @@
 										<div class="col-md-4">
 											<label>Packets</label>
 											<span><?php echo $row_order['packets'] ?></span>
-											
+											<input type="hidden" name="packets[]" value="<?php echo $row_order['packets'] ?>" >
 										</div>
 									</div>				
 						

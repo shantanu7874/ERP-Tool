@@ -6,6 +6,8 @@ $db = new Database;
 
 	$ssql = 'SELECT * FROM materials';
 	$resul = mysqli_query($db->getConnection(), $ssql);
+	$sql_cat = "SELECT * FROM category";
+	$result_cat = mysqli_query($db->getConnection(),$sql_cat);
 
 	$button = "Add";
 	$submitVal = "addProduct";
@@ -70,6 +72,17 @@ $db = new Database;
 		     								<label >GST %</label>
 		      								<input type="number" class="form-control numOnly" id="gst_no" name="gst_no" style="width:80px" >
 		    							</div>
+		    						</div>
+		    						<div class="row">
+		    							<div class="col-md-8">
+		    								<label>Category Name</label>
+		    								<select class="form-control" name="cat_name">
+		    									<?php while ($row_cat = mysqli_fetch_assoc($result_cat)){ ?>
+		    									<option value="<?php echo $row_cat ['cat_name'] ?>" name="cat_name"><?php echo $row_cat['cat_name'] ?></option>
+		    									<?php } ?>
+		    								</select>
+		    							</div>
+		    							
 		    						</div>
 		    						<div class="row">
 		    							<div class="col-md-6 mb-2">

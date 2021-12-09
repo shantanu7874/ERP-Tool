@@ -102,8 +102,9 @@ class Products {
 				$product_image = $_FILES['product_image']['name'];
 			} 
 			for ($i=0; $i <count($_POST['aiq']); $i++)  {
-			$product_name = $_POST['product_name']."-".$_POST['aiq'][$i];
-			$sql  = "INSERT into product (product_name,materials_id, req_percentage,gst_no, aiq, mrp, rate, discount,hsn_no,description, product_image, created, modified) values ('".$product_name."',
+			//$product_name = $_POST['product_name']."-".$_POST['aiq'][$i];
+			$sql  = "INSERT into product (product_name, cat_name,materials_id, req_percentage,gst_no, aiq, mrp, rate, discount,hsn_no,description, product_image, created, modified) values ('".$_POST['product_name']."',
+			'".$_POST['cat_name']."',
 			'".$material_name_to_string."',
 			'".$req_percentage_to_string."',
 			'".$_POST['gst_no'][$i]."',
